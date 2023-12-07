@@ -1,5 +1,6 @@
 import type {RouteObject} from 'react-router-dom'
 import App from "@src/App.tsx";
+import HomeFeed from "@src/pages/HomeFeed";
 
 const routes: RouteObject[] = [
     {
@@ -8,7 +9,7 @@ const routes: RouteObject[] = [
         children: [
             {
                 path: '/home-feed',
-                element: <p>Hello home feed</p>
+                element: <HomeFeed/>
             }
         ]
     }
