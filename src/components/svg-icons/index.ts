@@ -4,3 +4,6 @@ export { default as MobileIcon2 } from "./MobileIcon2";
 export { default as EyeIcon } from "./EyeIcon";
 export { default as DeleteIcon } from "./DeleteIcon";
 export { default as DraggableIcon } from "./DraggableIcon";
+export { default as GroupPeopleIcon } from "./GroupPeopleIcon";
+export { default as HomeIcon } from "./HomeIcon";
+export { default as InboxIcon } from "./InboxIcon";

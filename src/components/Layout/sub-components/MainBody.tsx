@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material";
 
 const Main = styled("main")(() => {
   return {

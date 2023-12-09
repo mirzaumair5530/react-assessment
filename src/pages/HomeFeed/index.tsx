@@ -1,11 +1,14 @@
 import React, { FC, useState } from "react";
-import styled from "@emotion/styled";
+import { styled } from "@mui/material";
 import { Box, Typography, Menu, MenuItem } from "@mui/material";
 import { menuClasses } from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { MobileIcon, MobileIcon2 } from "@src/components/svg-icons";
-import { ItemCard } from "@src/components/shared-components";
-import DraggableList from "../../components/shared-components/DraggableList.tsx";
+import {
+  ItemCard,
+  DraggableList,
+  MobilePreview,
+} from "@src/components/shared-components";
 import { DataType, useAppContext } from "@src/contexts/AppContext";
 
 const Container = styled(Box)(() => {
@@ -26,20 +29,29 @@ const Container = styled(Box)(() => {
     "& .home-feed-content-preview": {
       padding: "2.5rem 2.5rem 0 2.5rem",
       flexGrow: 1,
+      display: "flex",
+      gap: "2rem",
 
       "& .home-feed-list": {
         display: "flex",
         flexDirection: "column",
         gap: "1rem",
-        flexBasis: "40%",
-        maxWidth: 392,
+        flexBasis: "calc(50% - 2.5rem)",
+        maxWidth: "calc(392px - 2.5rem)",
         height: "calc(100% - 3.0625rem)",
         overflow: "hidden",
         overflowY: "auto",
-        marginBlock: "3.0625rem",
+        marginBlockStart: "3.0625rem",
         "& .custom-item-card": {
           marginBlock: "1rem",
         },
+      },
+
+      "& .home-feed-mobile-preview": {
+        padding: "0.5rem 0.5rem 0 0.5rem",
+        height: "calc(100% - 0.5rem)",
+        flexBasis: "calc(50% - 2.5rem - 0.5rem)",
+        maxWidth: "calc(587px - 2.5rem - 0.5rem)",
       },
     },
   };
@@ -91,6 +103,7 @@ const HomeFeed: FC = () => {
   };
   return (
     <Container>
+      {/*starts create menu*/}
       <CustomMenu
         open={!!anchorEl}
         anchorEl={anchorEl}
@@ -122,6 +135,8 @@ const HomeFeed: FC = () => {
           </ItemCard>
         </MenuItem>
       </CustomMenu>
+      {/*ends create menu*/}
+
       <Box className={"home-feed-content-left"}>
         <Box className={"upper-section"}>
           <Box
@@ -186,6 +201,9 @@ const HomeFeed: FC = () => {
       <Box className={"home-feed-content-preview"}>
         <Box className={"home-feed-list"}>
           <DraggableList />
+        </Box>
+        <Box className={"home-feed-mobile-preview"}>
+          <MobilePreview />
         </Box>
       </Box>
     </Container>
