@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 const Main = styled("main")(() => {
   return {
     maxWidth: 1440,
-    minHeight: "100vh",
+    minHeight: 900,
+    height: "100vh",
     display: "flex",
   };
 });

@@ -3,7 +3,7 @@ import type { To } from "react-router-dom";
 
 interface SidebarContentType {
   icon: ReactNode;
-  name: String;
+  name: string;
   path: To;
 }
 

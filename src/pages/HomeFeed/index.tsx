@@ -1,15 +1,12 @@
-import { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Menu, MenuItem } from "@mui/material";
+import { menuClasses } from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
-import {
-  DeleteIcon,
-  DraggableIcon,
-  EyeIcon,
-  MobileIcon,
-  MobileIcon2,
-} from "@src/components/svg-icons";
+import { MobileIcon, MobileIcon2 } from "@src/components/svg-icons";
 import { ItemCard } from "@src/components/shared-components";
+import DraggableList from "../../components/shared-components/DraggableList.tsx";
+import { DataType, useAppContext } from "@src/contexts/AppContext";
 
 const Container = styled(Box)(() => {
   return {
@@ -27,7 +24,7 @@ const Container = styled(Box)(() => {
       },
     },
     "& .home-feed-content-preview": {
-      padding: "2.5rem",
+      padding: "2.5rem 2.5rem 0 2.5rem",
       flexGrow: 1,
 
       "& .home-feed-list": {
@@ -36,13 +33,95 @@ const Container = styled(Box)(() => {
         gap: "1rem",
         flexBasis: "40%",
         maxWidth: 392,
+        height: "calc(100% - 3.0625rem)",
+        overflow: "hidden",
+        overflowY: "auto",
+        marginBlock: "3.0625rem",
+        "& .custom-item-card": {
+          marginBlock: "1rem",
+        },
       },
     },
   };
 });
+
+const CustomMenu = styled(Menu)(() => {
+  return {
+    [`& .${menuClasses.paper}`]: {
+      width: "100%",
+      maxWidth: 287,
+      borderRadius: 14,
+    },
+  };
+});
 const HomeFeed: FC = () => {
+  const [anchorEl, setAnchorEl] = useState<null | Element>(null);
+  const [disabled, setDisabled] = useState(false);
+
+  const { setData } = useAppContext();
+
+  const handleCreate = (action: "todo" | "action") => {
+    try {
+      setDisabled(true);
+      let data: DataType;
+      if (action === "todo") {
+        data = {
+          type: "todo",
+          text: "Todo",
+        };
+      } else {
+        data = {
+          type: "action",
+          text: "Call to Action",
+        };
+      }
+      setData((prevState) => [...prevState, data]);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setAnchorEl(null);
+      setDisabled(false);
+    }
+  };
+
+  const handleClick = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(currentTarget);
+  };
   return (
     <Container>
+      <CustomMenu
+        open={!!anchorEl}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+      >
+        <MenuItem disabled={disabled} onClick={() => handleCreate("action")}>
+          <ItemCard
+            background={"transparent"}
+            padding={0}
+            iconStyles={{
+              fontSize: "1.25rem",
+            }}
+            icon={<>☝️️</>}
+          >
+            <Typography fontSize={"1"}>Call to Action</Typography>
+          </ItemCard>
+        </MenuItem>
+
+        <MenuItem disabled={disabled} onClick={() => handleCreate("todo")}>
+          <ItemCard
+            background={"transparent"}
+            padding={0}
+            iconStyles={{
+              fontSize: "1.25rem",
+            }}
+            icon={<>✅️</>}
+          >
+            <Typography fontSize={"1"}>Todo</Typography>
+          </ItemCard>
+        </MenuItem>
+      </CustomMenu>
       <Box className={"home-feed-content-left"}>
         <Box className={"upper-section"}>
           <Box
@@ -61,7 +140,7 @@ const HomeFeed: FC = () => {
               </Typography>
             </Box>
             <Box>
-              <IconButton size={"large"}>
+              <IconButton size={"large"} onClick={handleClick}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="13"
@@ -77,7 +156,7 @@ const HomeFeed: FC = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box pt={"2rem"} mb={"1rem"} className={""}>
+          <Box pt={"2rem"} mb={"1rem"}>
             <ItemCard icon={<MobileIcon2 />} variant={"contained"}>
               <Typography fontSize={"1.125rem"} fontWeight={"bold"}>
                 Live Preview
@@ -105,58 +184,8 @@ const HomeFeed: FC = () => {
         </Box>
       </Box>
       <Box className={"home-feed-content-preview"}>
-        <Box className={"home-feed-list"} mt={"3.0625rem"}>
-          <ItemCard
-            variant={"outlined"}
-            iconStyles={{ fontSize: "1rem" }}
-            p={"0.75rem"}
-            icon={<DraggableIcon />}
-          >
-            <Typography fontSize={"1.125rem"} fontWeight={"bold"}>
-              <Box display={"flex"} alignItems={"center"} gap={"0.75rem"}>
-                <div>☝️️</div>
-                <Typography fontSize={"1.125rem"} fontWeight={"bold"}>
-                  Call to Action
-                </Typography>
-              </Box>
-            </Typography>
-          </ItemCard>
-          <ItemCard
-            variant={"outlined"}
-            iconStyles={{ fontSize: "1rem" }}
-            p={"0.75rem"}
-            icon={<DraggableIcon />}
-            childrenStyles={{
-              flexGrow: 1,
-            }}
-          >
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"space-between"}
-            >
-              <Box
-                flexGrow={1}
-                display={"flex"}
-                alignItems={"center"}
-                gap={"0.75rem"}
-              >
-                <Box fontSize={"1.125rem"}>✅</Box>
-                <Typography fontSize={"1.125rem"} fontWeight={"bold"}>
-                  Todo
-                </Typography>
-              </Box>
-
-              <Box display={"flex"} alignItems={"center"} gap={"0.75rem"}>
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton>
-                  <EyeIcon />
-                </IconButton>
-              </Box>
-            </Box>
-          </ItemCard>
+        <Box className={"home-feed-list"}>
+          <DraggableList />
         </Box>
       </Box>
     </Container>
