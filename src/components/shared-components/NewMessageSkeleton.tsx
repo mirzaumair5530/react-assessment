@@ -7,7 +7,7 @@ const SkeletonBody = styled(Box)(() => {
     alignItems: "center",
     gap: "0.5rem",
     width: "100%",
-    boxShadow: "0px 1.701px 5.104px 0px rgba(0, 0, 0, 0.06)",
+
     ".avatar": {
       width: 40,
       height: 40,

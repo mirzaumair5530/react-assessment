@@ -5,7 +5,7 @@ import CardContent, { cardContentClasses } from "@mui/material/CardContent";
 const CustomCard = styled(Card)(() => {
   return {
     borderRadius: 14,
-
+    boxShadow: "0px 1.701px 5.104px 0px rgba(0, 0, 0, 0.06) !important",
     [`.${cardContentClasses.root}`]: {
       display: "flex",
       gap: "0.625rem",

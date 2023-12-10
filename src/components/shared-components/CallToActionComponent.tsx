@@ -8,6 +8,7 @@ const CustomCard = styled(Card)(() => {
   return {
     position: "relative",
     borderRadius: 14,
+    boxShadow: "0px 1.701px 5.104px 0px rgba(0, 0, 0, 0.06) !important",
     [`.${cardMediaClasses.root}`]: {
       height: 264,
       background: "lightgray 50% / cover no-repeat",
