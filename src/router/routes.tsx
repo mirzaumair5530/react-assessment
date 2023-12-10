@@ -1,6 +1,7 @@
-import type { RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import App from "@src/App.tsx";
 import HomeFeed from "@src/pages/HomeFeed";
+import WildCard from "@src/pages/WildCard";
 
 const routes: RouteObject[] = [
   {
@@ -13,7 +14,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "*",
-        element: <div>In progress</div>,
+        element: <WildCard />,
       },
     ],
   },
