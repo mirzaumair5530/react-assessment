@@ -7,7 +7,7 @@ import CardMedia, { cardMediaClasses } from "@mui/material/CardMedia";
 const CustomCard = styled(Card)(() => {
   return {
     position: "relative",
-    borderRadius: 16,
+    borderRadius: 14,
     [`.${cardMediaClasses.root}`]: {
       height: 264,
       background: "lightgray 50% / cover no-repeat",

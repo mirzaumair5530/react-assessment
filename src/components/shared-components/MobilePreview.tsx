@@ -12,7 +12,9 @@ import {
   NewMessageSkeleton,
   GroupsRSVPsSkeleton,
   CallToActionComponent,
+  ToDoItemComponent,
 } from "@src/components/shared-components";
+import { useAppContext } from "@src/contexts/AppContext";
 
 const MobileContainer = styled(Box)(() => {
   return {
@@ -36,6 +38,9 @@ const MobileContainer = styled(Box)(() => {
     "& .mobile-preview-body": {
       flexGrow: 1,
       paddingInline: "1rem",
+      maxHeight: "calc(100% - 190px)",
+      overflow: "hidden",
+      overflowY: "auto",
       ".body-upper-section": {
         ".section-heading": {
           color: "#7F7F82",
@@ -48,6 +53,9 @@ const MobileContainer = styled(Box)(() => {
       },
       ".body-bottom-section": {
         paddingBlockStart: "1.25rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.875rem",
       },
     },
 
@@ -74,6 +82,7 @@ const MobileContainer = styled(Box)(() => {
 });
 
 const MobilePreview: FC = () => {
+  const { data } = useAppContext();
   return (
     <MobileContainer>
       <Box className={"mobile-preview-top-nav"}>
@@ -97,7 +106,21 @@ const MobilePreview: FC = () => {
           </Box>
         </Box>
         <Box className={"body-bottom-section"}>
-          <CallToActionComponent />
+          {data
+            .filter((item) => !item.hidden)
+            .map((item, index) => {
+              switch (item.type) {
+                case "todo": {
+                  return <ToDoItemComponent index={index} />;
+                }
+                case "action": {
+                  return <CallToActionComponent index={index} />;
+                }
+                default: {
+                  return null;
+                }
+              }
+            })}
         </Box>
       </Box>
       <Box className={"mobile-preview-bottom-nav"}>
