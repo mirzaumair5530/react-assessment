@@ -32,6 +32,7 @@ const NavBar = styled(Box)(() => {
       "& .bottom-content": {
         "&  img": {
           borderRadius: "50%",
+          width: "100%",
           maxWidth: 32,
           maxHeight: 32,
         },

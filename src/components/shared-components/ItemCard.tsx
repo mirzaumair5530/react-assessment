@@ -1,14 +1,16 @@
 import { FC, ReactNode, PropsWithChildren } from "react";
 import styled from "@emotion/styled";
 import { Box, BoxProps } from "@mui/material";
+import { iconButtonClasses } from "@mui/material/IconButton";
 
 const CustomItemCard = styled(Box, {
   shouldForwardProp: (propName) =>
     !["variant", "background"].includes(propName),
-})<{ variant?: "outlined" | "contained" | undefined; background?: string }>(({
-  variant,
-  background,
-}) => {
+})<{
+  variant?: "outlined" | "contained" | undefined;
+  background?: string;
+  iconHoverColor?: string;
+}>(({ variant, background, iconHoverColor }) => {
   return {
     display: "flex",
     alignItems: "center",
@@ -20,11 +22,22 @@ const CustomItemCard = styled(Box, {
         ? "#ECEDF0"
         : "#FFFFFF",
     border: "1px solid" + (variant === "outlined" ? "#ECEDF0" : "transparent"),
+
+    ...(iconHoverColor && {
+      [`&:hover`]: {
+        [`.${iconButtonClasses.root}, .item-icon`]: {
+          "svg path": {
+            fill: iconHoverColor || "#000",
+          },
+        },
+      },
+    }),
   };
 });
 
 interface ItemCardProps {
   icon: ReactNode;
+  iconHoverColor?: string;
   iconStyles?: BoxProps;
   variant?: "outlined" | "contained" | undefined;
   childrenStyles?: BoxProps;

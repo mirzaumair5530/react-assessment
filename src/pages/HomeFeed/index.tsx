@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { styled } from "@mui/material";
+import { ButtonBase, styled } from "@mui/material";
 import { Box, Typography, Menu, MenuItem } from "@mui/material";
 import { menuClasses } from "@mui/material/Menu";
 import IconButton from "@mui/material/IconButton";
@@ -23,6 +23,10 @@ const Container = styled(Box)(() => {
       boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)",
       padding: "2.25rem 1.5rem 1.5rem 1.5rem",
       "& .upper-section": {
+        ".live-preview-button:hover, .live-preview-button.active": {
+          background: "#ECEDF0",
+          cursor: "pointer",
+        },
         borderBottom: "1px solid #ECEDF0;",
       },
     },
@@ -70,7 +74,7 @@ const HomeFeed: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
   const [disabled, setDisabled] = useState(false);
 
-  const { setData } = useAppContext();
+  const { setData, preview, setPreview } = useAppContext();
 
   const handleCreate = (action: "todo" | "action") => {
     try {
@@ -80,11 +84,13 @@ const HomeFeed: FC = () => {
         data = {
           type: "todo",
           text: "Todo",
+          hidden: false,
         };
       } else {
         data = {
           type: "action",
           text: "Call to Action",
+          hidden: false,
         };
       }
       setData((prevState) => [...prevState, data]);
@@ -94,6 +100,10 @@ const HomeFeed: FC = () => {
       setAnchorEl(null);
       setDisabled(false);
     }
+  };
+
+  const handlePreview = () => {
+    setPreview((preview) => !preview);
   };
 
   const handleClick = ({
@@ -172,7 +182,14 @@ const HomeFeed: FC = () => {
             </Box>
           </Box>
           <Box pt={"2rem"} mb={"1rem"}>
-            <ItemCard icon={<MobileIcon2 />} variant={"contained"}>
+            <ItemCard
+              onClick={handlePreview}
+              component={ButtonBase}
+              width={"100%"}
+              justifyContent={"flex-start"}
+              icon={<MobileIcon2 />}
+              className={"live-preview-button " + (preview ? "active" : "")}
+            >
               <Typography fontSize={"1.125rem"} fontWeight={"bold"}>
                 Live Preview
               </Typography>
@@ -198,13 +215,16 @@ const HomeFeed: FC = () => {
           </ItemCard>
         </Box>
       </Box>
+
       <Box className={"home-feed-content-preview"}>
         <Box className={"home-feed-list"}>
           <DraggableList />
         </Box>
-        <Box className={"home-feed-mobile-preview"}>
-          <MobilePreview />
-        </Box>
+        {preview && (
+          <Box className={"home-feed-mobile-preview"}>
+            <MobilePreview />
+          </Box>
+        )}
       </Box>
     </Container>
   );

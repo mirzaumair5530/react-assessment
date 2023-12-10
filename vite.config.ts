@@ -8,5 +8,6 @@ export default defineConfig({
     alias: {
       "@src": "/src",
     },
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
 });
