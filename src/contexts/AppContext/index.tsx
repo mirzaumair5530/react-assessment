@@ -33,7 +33,7 @@ export const useAppContext = () => useContext(AppContext);
 
 const AppContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [data, setData] = useState<DataType[]>([]);
-  const [preview, setPreview] = useState<boolean>(false);
+  const [preview, setPreview] = useState<boolean>(true);
 
   useEffect(() => {
     const data = localStorage.getItem("data");

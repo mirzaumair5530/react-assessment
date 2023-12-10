@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, styled } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {
   GroupPeopleIcon,
@@ -8,6 +8,10 @@ import {
   UserIcon,
   TodoIcon,
 } from "@src/components/svg-icons";
+import {
+  NewMessageSkeleton,
+  GroupsRSVPsSkeleton,
+} from "@src/components/shared-components";
 
 const MobileContainer = styled(Box)(() => {
   return {
@@ -30,6 +34,17 @@ const MobileContainer = styled(Box)(() => {
 
     "& .mobile-preview-body": {
       flexGrow: 1,
+      paddingInline: "1rem",
+      ".body-upper-section": {
+        ".section-heading": {
+          color: "#7F7F82",
+          paddingBlock: "1.25rem 0.375rem ",
+          marginBottom: "1rem",
+          fontSize: "0.75rem",
+        },
+        paddingBottom: "1.375rem",
+        borderBottom: "1px solid #F5F5F5",
+      },
     },
 
     "& .mobile-preview-bottom-nav": {
@@ -65,7 +80,19 @@ const MobilePreview: FC = () => {
           <TodoIcon />
         </IconButton>
       </Box>
-      <Box className={"mobile-preview-body"}></Box>
+      <Box className={"mobile-preview-body"}>
+        <Box className={"body-upper-section"}>
+          <Box className={"section-heading"}>
+            <Typography className={"section-heading"}>New messages</Typography>
+            <NewMessageSkeleton />
+          </Box>
+
+          <Box className={"group-event-section"}>
+            <Typography className={"section-heading"}>Group RSVPs</Typography>
+            <GroupsRSVPsSkeleton />
+          </Box>
+        </Box>
+      </Box>
       <Box className={"mobile-preview-bottom-nav"}>
         <IconButton>
           <HomeIcon />
