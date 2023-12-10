@@ -5,7 +5,7 @@ import { iconButtonClasses } from "@mui/material/IconButton";
 
 const CustomItemCard = styled(Box, {
   shouldForwardProp: (propName) =>
-    !["variant", "background"].includes(propName),
+    !["variant", "background", "iconHoverColor"].includes(propName),
 })<{
   variant?: "outlined" | "contained" | undefined;
   background?: string;

@@ -11,11 +11,12 @@ import {
 import {
   NewMessageSkeleton,
   GroupsRSVPsSkeleton,
+  CallToActionComponent,
 } from "@src/components/shared-components";
 
 const MobileContainer = styled(Box)(() => {
   return {
-    height: 724,
+    height: 760,
     width: 353,
     borderRadius: 60,
     border: "17px solid #000",
@@ -44,6 +45,9 @@ const MobileContainer = styled(Box)(() => {
         },
         paddingBottom: "1.375rem",
         borderBottom: "1px solid #F5F5F5",
+      },
+      ".body-bottom-section": {
+        paddingBlockStart: "1.25rem",
       },
     },
 
@@ -82,7 +86,7 @@ const MobilePreview: FC = () => {
       </Box>
       <Box className={"mobile-preview-body"}>
         <Box className={"body-upper-section"}>
-          <Box className={"section-heading"}>
+          <Box className={"new-message-section"}>
             <Typography className={"section-heading"}>New messages</Typography>
             <NewMessageSkeleton />
           </Box>
@@ -91,6 +95,9 @@ const MobilePreview: FC = () => {
             <Typography className={"section-heading"}>Group RSVPs</Typography>
             <GroupsRSVPsSkeleton />
           </Box>
+        </Box>
+        <Box className={"body-bottom-section"}>
+          <CallToActionComponent />
         </Box>
       </Box>
       <Box className={"mobile-preview-bottom-nav"}>
