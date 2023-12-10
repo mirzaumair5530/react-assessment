@@ -11,6 +11,10 @@ const routes: RouteObject[] = [
         path: "/home-feed",
         element: <HomeFeed />,
       },
+      {
+        path: "*",
+        element: <div>In progress</div>,
+      },
     ],
   },
 ];

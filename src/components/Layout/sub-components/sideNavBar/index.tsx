@@ -60,7 +60,7 @@ const SideNavBar: FC = () => {
             flexDirection={"column"}
             className={"router-container"}
             mt={"2.5rem"}
-            gap={"2rem"}
+            gap={"0.5rem"}
           >
             {sidebarContent.map(({ icon, path }, index) => {
               return (

@@ -25,7 +25,6 @@ const MobileContainer = styled(Box)(() => {
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
-
     "& .mobile-preview-top-nav": {
       padding: " 2.375rem  1.0625rem 0.8125rem 1.0625rem",
       display: "flex",
@@ -37,8 +36,8 @@ const MobileContainer = styled(Box)(() => {
 
     "& .mobile-preview-body": {
       flexGrow: 1,
-      paddingInline: "1rem",
-      maxHeight: "calc(100% - 190px)",
+      padding: "1rem",
+      maxHeight: "calc(100% - 190px + 2rem)",
       overflow: "hidden",
       overflowY: "auto",
       ".body-upper-section": {
