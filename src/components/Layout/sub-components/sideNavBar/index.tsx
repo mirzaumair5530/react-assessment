@@ -1,12 +1,12 @@
 import { FC } from "react";
 import styled from "@emotion/styled";
 import { Box, Grid } from "@mui/material";
+import IconButton, { iconButtonClasses } from "@mui/material/IconButton";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+
 import { sidebarContent } from "./sidebarContent";
 import { ExpandIcon } from "@src/components/svg-icons";
-
 import userIconImg from "@src/assets/userIconImg.png";
-import IconButton from "@mui/material/IconButton";
-import { Link as RouterLink } from "react-router-dom";
 
 const NavBar = styled(Box)(() => {
   return {
@@ -28,6 +28,13 @@ const NavBar = styled(Box)(() => {
           width: 24,
           height: 24,
         },
+        [`.${iconButtonClasses.root}`]: {
+          padding: "1rem",
+          borderRadius: 12,
+          "&.active": {
+            background: "#F2F2F4",
+          },
+        },
       },
       "& .bottom-content": {
         "&  img": {
@@ -41,6 +48,7 @@ const NavBar = styled(Box)(() => {
   };
 });
 const SideNavBar: FC = () => {
+  const { pathname } = useLocation();
   return (
     <NavBar>
       <Box className={"navbar-body"}>
@@ -58,7 +66,9 @@ const SideNavBar: FC = () => {
               return (
                 <Grid item key={index}>
                   <RouterLink to={path}>
-                    <IconButton>{icon}</IconButton>
+                    <IconButton className={path === pathname ? "active" : ""}>
+                      {icon}
+                    </IconButton>
                   </RouterLink>
                 </Grid>
               );

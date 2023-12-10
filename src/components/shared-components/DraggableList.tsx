@@ -37,7 +37,6 @@ const DraggableList: FC = () => {
     try {
       const { destination, source } = result;
       setData((prevData) => {
-        debugger;
         const tempData = [...prevData];
         const [sourceElement] = tempData.splice(source.index, 1);
         if (sourceElement && destination) {

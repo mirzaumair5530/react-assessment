@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { Box, styled, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import {
@@ -111,10 +111,10 @@ const MobilePreview: FC = () => {
             .map((item, index) => {
               switch (item.type) {
                 case "todo": {
-                  return <ToDoItemComponent index={index} />;
+                  return <ToDoItemComponent key={index} />;
                 }
                 case "action": {
-                  return <CallToActionComponent index={index} />;
+                  return <CallToActionComponent key={index} />;
                 }
                 default: {
                   return null;

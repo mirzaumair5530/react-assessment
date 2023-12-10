@@ -16,6 +16,7 @@ const CustomItemCard = styled(Box, {
     alignItems: "center",
     borderRadius: 12,
     gap: "1rem",
+    cursor: "pointer",
     backgroundColor: background
       ? background
       : variant === "contained"
