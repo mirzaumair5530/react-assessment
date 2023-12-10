@@ -8,7 +8,7 @@ const routes: RouteObject[] = [
     element: <App />,
     children: [
       {
-        path: "/home-feed",
+        path: "home-feed",
         element: <HomeFeed />,
       },
       {
