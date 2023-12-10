@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Card, styled } from "@mui/material";
+import { Card, styled, Link } from "@mui/material";
 import CardContent, { cardContentClasses } from "@mui/material/CardContent";
 import Button, { buttonClasses } from "@mui/material/Button";
 import CardMedia, { cardMediaClasses } from "@mui/material/CardMedia";
@@ -37,7 +37,7 @@ const CallToActionComponent: FC = () => {
     <CustomCard elevation={2}>
       <CardMedia image={"./CallOfActionMedia.jpeg"} />
       <CardContent>
-        <Button variant={"outlined"}>Learn More</Button>
+        <Button component={Link} href={'https://google.com'} variant={"outlined"}>Learn More</Button>
       </CardContent>
     </CustomCard>
   );
